@@ -1,0 +1,42 @@
+<section class="card">
+  <div class="card-body">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="card-title">Users List</h5>
+      <a type="button" [routerLink]="['/customer/add']" class="btn btn-success">
+        Add <i class="fas fa-plus-square"></i>
+      </a>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Full name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Country Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList">
+          <th>{{ user.firstName }} {{ user.lastName }}</th>
+          <td>{{ user.address }}</td>
+          <td>{{ user.location.country }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="showUser(user.id)">
+              <i class="fas fa-eye"></i></button
+            >&nbsp;
+            <button class="btn btn-warning btn-sm" (click)="editUser(user.id)">
+              <i class="fas fa-edit"></i></button
+            >&nbsp;
+            <button class="btn btn-danger btn-sm" (click)="deletUser(user.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- </ng-template> -->
+  </div>
+</section>
