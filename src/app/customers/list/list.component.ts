@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/User.interface';
 import { CustomerService } from 'src/app/services/customer/customer.service';
+import swal  from'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -29,6 +30,20 @@ export class ListComponent implements OnInit {
   }
 
   public deletUser(id: string){
+    swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((res) => {
+      if (res.isConfirmed) {
+        console.log('Deletes');
+        swal.fire('Success', 'Deleted user', 'success');
+      }
+    })
     console.log('show..');
   }
 

@@ -10,11 +10,23 @@
       <div class="col-md-6">
         <label for="name" class="form-label">First Name</label>
         <input
-          formControlName="firstName"
+          formControlName="fisrtName"
           type="text"
           class="form-control"
           id="name"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.fisrtName.touched) && f.fisrtName.errors?.required
+          }"
         />
+        <div
+          *ngIf="
+            (submited || f.fisrtName.touched) && f.fisrtName.errors?.required
+          "
+          class="invalid-feedback"
+        >
+          Your Name is Required.
+        </div>
       </div>
       <div class="col-md-6">
         <label for="lastname" class="form-label">Last Name</label>
@@ -23,55 +35,119 @@
           type="text"
           class="form-control"
           id="lastname"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.lastName.touched) && f.lastName.errors?.required
+          }"
         />
+        <div
+          *ngIf="
+            (submited || f.lastName.touched) && f.lastName.errors?.required
+          "
+          class="invalid-feedback"
+        >
+          Your LastName is Required.
+        </div>
       </div>
       <div class="col-md-7">
         <label for="address" class="form-label">Address</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control is-invalid"
           id="address"
           formControlName="address"
           placeholder="1234 Main St"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.address.touched) && f.address.errors?.required
+          }"
         />
+        <div
+          *ngIf="(submited || f.address.touched) && f.address.errors?.required"
+          class="invalid-feedback"
+        >
+          Your Address is Required.
+        </div>
       </div>
       <div class="col-md-5">
         <label for="country" class="form-label">Country</label>
         <input
           type="text"
           formControlName="country"
-          class="form-control"
+          class="form-control is-invalid"
           id="country"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.country.touched) && f.country.errors?.required
+          }"
           placeholder="Country"
         />
+        <div
+          *ngIf="(submited || f.country.touched) && f.country.errors?.required"
+          class="invalid-feedback"
+        >
+          Your Country is Required.
+        </div>
       </div>
       <div class="col-md-6">
         <label for="state" class="form-label">State</label>
         <input
           type="text"
           formControlName="state"
-          class="form-control"
+          class="form-control is-invalid"
           id="state"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.state.touched) && f.state.errors?.required
+          }"
           placeholder="State"
         />
+        <div
+          *ngIf="(submited || f.state.touched) && f.state.errors?.required"
+          class="invalid-feedback"
+        >
+          Your State is Required.
+        </div>
       </div>
       <div class="col-md-6">
         <label for="mail" class="form-label">Email</label>
         <input
           type="email"
           formControlName="email"
-          class="form-control"
+          class="form-control is-invalid"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.email.touched) && f.email.errors?.required
+          }"
           id="mail"
         />
+        <div
+          *ngIf="(submited || f.email.touched) && f.email.errors?.required"
+          class="invalid-feedback"
+        >
+          Your E-Mail is Required or not have email format.
+        </div>
       </div>
       <div class="col-md-6">
         <label for="password" class="form-label">Password</label>
         <input
           type="password"
           formControlName="password"
-          class="form-control"
+          class="form-control is-invalid"
           id="password"
+          [ngClass]="{
+            'is-invalid':
+              (submited || f.password.touched) && f.password.errors?.required
+          }"
         />
+        <div
+          *ngIf="
+            (submited || f.password.touched) && f.password.errors?.required
+          "
+          class="invalid-feedback"
+        >
+          Your password is Required.
+        </div>
       </div>
       <div class="col-md-6">
         <label for="repeatpassword" class="form-label">Repeat Password</label>
@@ -80,11 +156,19 @@
           formControlName="passwordRepeat"
           class="form-control"
           id="repeatpassword"
+          [ngClass]="{
+            'is-invalid':
+              submited ||
+              f.passwordRepeat.touched ||
+              (userForm.hasError('confirmedValidator') &&
+                f.passwordRepeat.errors?.required)
+          }"
         />
+        <div class="invalid-feedback">Your password not equal.</div>
       </div>
 
       <div class="col-12 my-3">
-        <button type="submit" class="btn btn-primary">
+        <button type="button" (click)="save()" class="btn btn-primary">
           Add customer <i class="fas fa-save"></i>
         </button>
       </div>
