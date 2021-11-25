@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/User.interface';
-import { CustomerService } from 'src/app/services/customer/customer.service';
+import { User } from '../../interfaces/User.interface';
+import { CustomerService } from '../../services/customer/customer.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import swal  from'sweetalert2';
+import { ShowUserComponent } from '../../modals/show-user/show-user.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +15,21 @@ export class ListComponent implements OnInit {
 
   public userList: User[] = [];
 
-  constructor(private _customerService: CustomerService) { }
+  public userOne: User | null;
+
+  /**
+   * Auxiliar para obtener los modales.
+   *
+   * @type {BsModalRef}
+   * @memberof AssignCouponComponent
+   */
+  public modalRef: BsModalRef;
+
+  constructor(
+    private _customerService: CustomerService,
+    private modalService: BsModalService,
+    public router: Router,
+    ) { }
 
   ngOnInit(): void {
     this._customerService._getClients()
@@ -22,11 +39,16 @@ export class ListComponent implements OnInit {
   }
 
   public showUser(id: string){
-    console.log('show..');
+    this._customerService._getClient(id)
+      .subscribe( (user) => this.userOne = user );
+    this.modalRef = this.modalService.show(ShowUserComponent,
+      { initialState: { userToShow: this.userOne }}
+    );
   }
 
   public editUser(id: string){
     console.log('show..');
+    this.router.navigate([`customer/update/${id}`])
   }
 
   public deletUser(id: string){

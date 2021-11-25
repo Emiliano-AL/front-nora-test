@@ -57,4 +57,16 @@ export class CustomerService {
     const listUser: User[] = this.dummyClients;
     return   of<User[]>(listUser)
   }
+
+  public _getClient(idUser: string): Observable<User | null>{
+    const user = this.dummyClients.find( user => user.id == idUser );
+    if(user)
+      return of<User>(user);
+
+    return of(null);
+  }
+
+  public _saveUser(client: User){
+
+  }
 }

@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'add',
     component: AddComponent,
   },
+  {
+    path: 'update/:id',
+    component: AddComponent,
+  },
 ];
 
 @NgModule({

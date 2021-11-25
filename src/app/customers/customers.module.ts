@@ -7,6 +7,7 @@ import { AddComponent } from './add/add.component';
 import { ShowComponent } from './show/show.component';
 import { CustomerService } from '../services/customer/customer.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalsModule } from '../modals/modals.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule, FormsModule,
+    ModalsModule,
     ReactiveFormsModule,
     CustomersRoutingModule
   ],

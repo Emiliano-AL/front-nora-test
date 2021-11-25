@@ -10,6 +10,7 @@ import { DefaultLayoutComponent } from './shared/default-layout/default-layout.c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    ModalModule.forRoot(),
     CustomersModule,
     ModalsModule,
     NgbModule,
