@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
       console.log(this.userList);
   }
 
-  public showUser(id: string){
+  public showUser(id: number){
     this._customerService._getClient(id)
       .subscribe( (user) => this.userOne = user );
     this.modalRef = this.modalService.show(ShowUserComponent,

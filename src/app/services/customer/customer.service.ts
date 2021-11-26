@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/interfaces/User.interface';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+
+const baseUrl = `${environment.api_url}/User`;
 
 @Injectable({
   providedIn: 'root'
@@ -12,61 +16,17 @@ export class CustomerService {
 
   constructor(
     private http: HttpClient,
-  ) {
-    this.dummyClients.push({
-      id: "aasd",
-      address: "San Lazaro 9-a frac.",
-      email: "emiliano.0218@gmail.com",
-      firstName: "Emiliano",
-      lastName: "Landa",
-      password: "asdasdadasd",
-      location: {
-        country: "Mexico",
-        state: "Veracruz"
-      }
-    });
-    this.dummyClients.push({
-      id: "asdasd",
-      address: "San Lazaro 9-a frac.",
-      email: "ariadna.0218@gmail.com",
-      firstName: "Ariadna",
-      lastName: "Anastasio",
-      password: "asdasdadasd",
-      location: {
-        country: "Mexico",
-        state: "Veracruz"
-      }
-    });
-    this.dummyClients.push({
-      id: "qweqwe",
-      address: "San Lazaro 9-a frac.",
-      email: "lupita.0218@gmail.com",
-      firstName: "Maria",
-      lastName: "Diaz",
-      password: "asdasdadasd",
-      location: {
-        country: "Mexico",
-        state: "Veracruz"
-      }
-    });
-  }
-
-
+  ) { }
 
   public _getClients(): Observable<User[]>{
-    const listUser: User[] = this.dummyClients;
-    return   of<User[]>(listUser)
+    return this.http.get<User[]>(baseUrl);
   }
 
-  public _getClient(idUser: string): Observable<User | null>{
-    const user = this.dummyClients.find( user => user.id == idUser );
-    if(user)
-      return of<User>(user);
-
-    return of(null);
+  public _getClient(idUser: number): Observable<User | null>{
+    return this.http.get<User>(`${baseUrl}/${idUser}`);
   }
 
   public _saveUser(client: User){
-
+    return this.http.post(baseUrl, client);
   }
 }
