@@ -46,12 +46,12 @@ export class ListComponent implements OnInit {
     );
   }
 
-  public editUser(id: string){
+  public editUser(id: number){
     console.log('show..');
     this.router.navigate([`customer/update/${id}`])
   }
 
-  public deletUser(id: string){
+  public deletUser(id: number){
     swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

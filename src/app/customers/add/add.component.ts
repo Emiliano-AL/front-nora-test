@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
   /**
    * In edition mode id of the template.
    */
-  private _modelId: string;
+  private _modelId: number;
 
   public userOne: User | null;
 
