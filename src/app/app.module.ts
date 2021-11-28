@@ -12,6 +12,8 @@ import { AuthService } from './services/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AppRoutingModule,
     HttpClientModule,
     ModalModule.forRoot(),
+
+    AutocompleteLibModule,
+
     CustomersModule,
     ModalsModule,
     NgbModule,

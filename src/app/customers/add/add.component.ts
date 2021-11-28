@@ -5,6 +5,8 @@ import swal  from'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../../services/customer/customer.service';
 import { User } from '../../interfaces/User.interface';
+import { Country } from '../../interfaces/Country.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add',
@@ -28,27 +30,33 @@ export class AddComponent implements OnInit {
 
   public userOne: User | null;
 
+  public countriesList: Country[];
+
   constructor(private _fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private _customerService: CustomerService,
     ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.submited = false;
     this.activatedRoute.params.subscribe(params => {
       this._modelId = params.id;
     });
     this.edition = this._modelId ? true : false;
     this.initForm();
+
+    await this.loadCountries();
     if(this.edition)
       this.loadModel();
   }
 
+  private async loadCountries(){
+    this.countriesList = await this._customerService._getCountries();
+  }
+
   private loadModel(){
-    console.log(this._modelId);
     this._customerService._getClient(this._modelId)
       .subscribe( (user) => this.userOne = user );
-      console.log(this.userOne);
     this.userForm.reset(this.userOne);
   }
 
@@ -76,6 +84,10 @@ export class AddComponent implements OnInit {
     }
     console.log(this.userForm.value);
     swal.fire('Success', 'Registered user', 'success');
+  }
+
+  selectEvent(item: any) {
+    console.log('selected: ', item);
   }
 }
 //  *ngIf="f.fisrtName.touched && f.fisrtName.errors?.required"
