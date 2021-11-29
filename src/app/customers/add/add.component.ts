@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmedValidator } from '../../helpers/confirmed.validator';
 import swal  from'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
@@ -81,13 +81,19 @@ export class AddComponent implements OnInit {
     this.submited = true;
     if(this.userForm.valid){
       console.log('Save users');
+      this._customerService._saveUser(this.userForm.value)
+        .subscribe( res => {
+          console.log(res);
+           swal.fire('Success', 'Registered user', 'success');
+        });
     }
     console.log(this.userForm.value);
-    swal.fire('Success', 'Registered user', 'success');
+
   }
 
-  selectEvent(item: any) {
+  selectEvent(item: Country) {
     console.log('selected: ', item);
+    this.userForm.get('country')?.setValue(item.name)
+
   }
 }
-//  *ngIf="f.fisrtName.touched && f.fisrtName.errors?.required"
